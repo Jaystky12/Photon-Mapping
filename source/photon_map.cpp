@@ -196,11 +196,10 @@ void photon_map :: trace_photons (scene* scene, const Ray& emit_ray, const Vecto
                     Vector dir = uniform_spherical_sampling(nl, random);
                     ray = Ray(hitpoint + nl * 0.001, dir);
                     flux = flux.multiply(col);
-                    //cout << flux.x << flux.y << flux.z << endl;
                 }
                 else
                 {
-                    return;		/* No further bounces, only return */
+                    return;		/* No further bounces*/
                 }
                 break;
             } // case DIFF

@@ -16,7 +16,6 @@
 
 using namespace std;
 
-
 /******************************************************************
 * Main routine: Computation of the image (2x2 subpixels)
 * Key parameters
@@ -35,18 +34,18 @@ int main() {
     int width = 1024;
     int height = 768;
     int samples = 1;
-    int photons = 100 * 100000;
+    int photons = 200 * 100;
 	int photons_caustics = 100 * 100000;
 
     Timer timer = { "Main" };
 
     scene scene;
-    ray_tracer ray_tracer(10, 300, 2, 60, Color(Vector(0,0,0)));
+    ray_tracer ray_tracer(30, 300, 2, 60, Color(Vector(0,0,0)));
 
     Vector trans = Vector(50, 5, 100.0);
 	double scale = 80.0;
     /* Add given object to the scene */
-	//scene.addOBJFile("water_smoother.obj", trans, scale);
+	scene.add_OBJ_file("Objects/water_smoother.obj", trans, scale);
 
 
     /* Set camera origin and viewing direction (negative z direction) */
@@ -66,8 +65,8 @@ int main() {
 	photon_map_global.generate_map(&scene, &photon_map_global, photons, &random, true);
 	photon_map_global.build_photon_map();
 
-	// photon_map_caustics.generate_map(&scene, &photon_map_caustics, photons_caustics, &random, false);
-	// photon_map_caustics.build_photon_map();
+	photon_map_caustics.generate_map(&scene, &photon_map_caustics, photons_caustics, &random, false);
+	photon_map_caustics.build_photon_map();
 
 	std::cout << "successfull!" << std::endl;
 
@@ -117,15 +116,15 @@ int main() {
                         //                       ray_tracer.trace_ray(&scene, Ray(start, dir), 0, &random, &photon_map_global , 1, false, false, true)/samples;
 						
 						/* direct illumination */
-						// accumulated_color = accumulated_color +
-                        //                        ray_tracer.trace_ray(&scene, Ray(start, dir), 0, &random, &photon_map_global , 1, false, true, false)/samples;
+						accumulated_color = accumulated_color +
+                                               ray_tracer.trace_ray(&scene, Ray(start, dir), 0, &random, &photon_map_global , 1, false, true, false)/samples;
 
                         // /* global illumination */
                         accumulated_color = accumulated_color +
                                                ray_tracer.trace_ray(&scene, Ray(start, dir), 0, &random, &photon_map_global , 1, false, false, false)/samples;
 						/* caustics */
-						// accumulated_color = accumulated_color +
-                        //                       ray_tracer.trace_ray(&scene, Ray(start, dir), 0, &random, &photon_map_caustics , 1, true, false, false)/samples;
+						accumulated_color = accumulated_color +
+                                              ray_tracer.trace_ray(&scene, Ray(start, dir), 0, &random, &photon_map_caustics , 1, true, false, false)/samples;
 
                     }
 					/*subsampling*/					
