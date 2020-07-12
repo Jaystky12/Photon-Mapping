@@ -58,7 +58,7 @@ Color ray_tracer :: trace_ray (scene* scene, const Ray &ray, int depth, Random* 
                     Vector ldir = light->position - hitpoint;
                         
                     if (scene->intersect(Ray((hitpoint+nl * 0.001), (ldir)), t, id) && id == i) {
-                        Vector lemission = (light->emission/4) / (4 * M_PI * ldir.length_squared());
+                        Vector lemission = (light->emission) / (4 * M_PI * ldir.length_squared());
                         e = e + col.multiply((lemission) * max(0.0, nl.dot(ldir)));
                     }    
                 }

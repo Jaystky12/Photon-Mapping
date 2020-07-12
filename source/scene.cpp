@@ -6,7 +6,7 @@ using namespace std;
 
 Sphere spheres[] = 
 			{
-				Sphere(1.5, Vector(50, 81.6 - 16.5, 81.6), Vector(4, 4, 4) * 400, Vector(), DIFF,1), /* Light */
+				Sphere(1.5, Vector(50, 81.6 - 16.5, 81.6), Vector(4, 4, 4) * 100, Vector(), DIFF,1), /* Light */
 				Sphere(16.5, Vector(40, 16.5, 47), Vector(), Vector(1, 1, 1) * .999, SPEC,1), /* Mirror sphere */
 				//Sphere(10.0, Vector(45, 10.0, 105), Vector(), Vector(1, 1, 1) * .999, TRAN,1,1,1,1), /* Translucent sphere */
 				//Sphere(10.0, Vector(20.0, 50.0, 90.0), Vector(), Vector(1, 1, 1) * .999, GLOS,1,1,1,1), /* Glossy sphere */

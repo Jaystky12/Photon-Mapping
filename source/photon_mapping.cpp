@@ -119,7 +119,7 @@ int main() {
 						accumulated_color = accumulated_color +
                                                ray_tracer.trace_ray(&scene, Ray(start, dir), 0, &random, &photon_map_global , 1, false, true, false)/samples;
 
-                        // /* global illumination */
+                        /* global illumination */
                         accumulated_color = accumulated_color +
                                                ray_tracer.trace_ray(&scene, Ray(start, dir), 0, &random, &photon_map_global , 1, false, false, false)/samples;
 						/* caustics */
